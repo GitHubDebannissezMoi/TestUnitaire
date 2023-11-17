@@ -1,20 +1,28 @@
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class Item {
     private String name;
     private String content;
-    private LocalDate creationDate;
-    private List<String> namesItems;
+    private LocalDateTime creationDate;
+    private List<String> namesItems = new ArrayList<String>();
 
-    private Item(String name,String content) {
-
-
+    public Item(String name,String content) {
+        this.name = name;
+        this.content = content;
+        this.creationDate = LocalDateTime.now();
+        this.namesItems.add(name);
     }
 
-    public boolean itemIsValid(String name, String content) {
-        if(isNameValid(name) && isContentValid(content)) {
-            creationDate = LocalDate.now();
+    public boolean itemIsValid() {
+        if(isNameValid(this.name) && isContentValid(this.content)) {
             System.out.println("Item Valide");
             return true;
         }
@@ -25,41 +33,31 @@ public class Item {
     }
 
     private boolean isNameValid(String name) {
+        int cpt = 0;
         for (String i:this.namesItems) {
             if(i.contains(name)) {
-                return false;
+                cpt++;
             }
         }
-        this.namesItems.add(name);
-        return true;
+
+        if(cpt > 1) {
+            System.out.println("Name non unique");
+            return false;
+        }
+        else {
+            System.out.println("Name unique");
+            return true;
+        }
     }
 
     private boolean isContentValid(String content) {
         if(content.length() > 1000) {
             System.out.println("content non valide");
-            return true;
+            return false;
         }
         else {
             System.out.println("Content valide");
-            return false;
+            return true;
         }
-    }
-
-    public String getContent() {
-        return content;
-    }
-    public LocalDate getCreationDate() {
-        return creationDate;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

@@ -1,20 +1,23 @@
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import static java.time.temporal.ChronoUnit.MINUTES;
 
+@Getter
 public class ToDoList {
-    private List<Item> items;
-
-    public List<Item> getItems() {
-        return items;
-    }
+    private List<Item> items = new ArrayList<Item>();
+    private EmailSenderService email;
 
     public void addItem(Item item,User user) {
-        if(MINUTES.between(item.getCreationDate().atStartOfDay(), LocalDate.now().atStartOfDay()) > 30
+        if(MINUTES.between(item.getCreationDate(), LocalDateTime.now()) > 30
         && user.isUserValid()) {
             this.items.add(item);
             if(items.size() == 8) {
-                EmailSenderService.sendMail(user.email);
+                email.sendMail(user.email);
             }
         }
         else {

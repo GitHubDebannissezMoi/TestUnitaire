@@ -17,13 +17,13 @@ public class User
         this.password = null;
     }
 
-    boolean isValidEmail(String email)
+    public boolean isValidEmail(String email)
     {
         return email.matches("^[a-z]*@[a-z]*\\.[a-z]*$");
     }
 
 
-    boolean isValidPassword(String password)
+    public boolean isValidPassword(String password)
     {
         if(password.matches("^(?=.*[A-Z])(?=.*[0-9]).+$"))
             if(password.length() >= 8)
@@ -32,7 +32,7 @@ public class User
         return false;
     }
 
-    boolean isValidAge(int age)
+    public boolean isValidAge(int age)
     {
         return age >= 13 && age <= 120;
     }
@@ -61,7 +61,7 @@ public class User
 
 
 
-    User(String firstname,String lastname, String password,String email,int age)
+    public User(String firstname,String lastname, String password,String email,int age)
     {
         this.firstname = firstname;
         this.lastname = lastname;

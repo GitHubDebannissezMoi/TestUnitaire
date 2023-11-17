@@ -1,5 +1,6 @@
 public class EmailSenderService {
-    public static void sendMail(String email) {
+    public boolean sendMail(String email) {
         System.out.println(email+" ToDoList quasiment pleine");
+        return true;
     }
 }
