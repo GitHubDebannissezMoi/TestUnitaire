@@ -1,7 +1,7 @@
 <archetype>
   <id>Tp_Test</id>
   <sources>
-    <source>src/main/java/App.java</source>
+    <source>src/Tp_Test.src.main.java.main/java/App.java</source>
   </sources>
   <testSources>
     <source>src/test/java/AppTest.java</source>
