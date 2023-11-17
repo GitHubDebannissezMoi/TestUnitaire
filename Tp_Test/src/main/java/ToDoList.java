@@ -1,13 +1,25 @@
-import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.util.*;
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 public class ToDoList {
-    private Item[] items = new Item[10];
+    private List<Item> items;
 
-    public Item[] getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(Item[] items) {
-        this.items = items;
+    public void addItem(Item item,User user) {
+        if(MINUTES.between(item.getCreationDate().atStartOfDay(), LocalDate.now().atStartOfDay()) > 30
+        && user.isUserValid()) {
+            this.items.add(item);
+            if(items.size() == 8) {
+                EmailSenderService.sendMail(user.email);
+            }
+        }
+        else {
+            System.out.println("Impossible d'ajouter un Item");
+        }
+
     }
 }

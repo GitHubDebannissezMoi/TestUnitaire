@@ -1,5 +1,3 @@
-package Tp_Test.src.main.java;
-
 import java.lang.*;
 
 public class User
@@ -39,23 +37,26 @@ public class User
         return age >= 13 && age <= 120;
     }
 
-    void isUserValid()
+    boolean isUserValid()
     {
-        if(isValidEmail(this.email))
-            if(isValidPassword(this.password))
-                if(isValidAge(this.age))
+        if(isValidEmail(this.email)) {
+            if (isValidPassword(this.password)) {
+                if (isValidAge(this.age)) {
                     System.out.println("User is valid");
-                else
-                {
+                    return true;
+                } else {
                     System.out.println("User is not valid");
                     setToNull();
+                    return false;
                 }
-            else
-            {
+            } else {
                 System.out.println("User is not valid");
                 setToNull();
+                return false;
             }
+        }
 
+        return false;
     }
 
 
